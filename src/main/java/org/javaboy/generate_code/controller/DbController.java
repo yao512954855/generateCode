@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 /**
- * @author 江南一点雨
- * @微信公众号 江南一点雨 vhr
+ * @author yao
+ * @jikeyou vhr
  * @网站 http://www.itboyhub.com
  * @国际站 http://www.javaboy.org
  * @微信 a_java_boy
@@ -28,7 +29,7 @@ import java.util.Map;
 @RestController
 public class DbController {
     @PostMapping("/connect")
-    public RespBean connect(@RequestBody Db db) {
+    public RespBean connect(@RequestBody Db db) throws SQLException {
         Connection con = DBUtils.initDb(db);
         if (con != null) {
             return RespBean.ok("数据库连接成功");

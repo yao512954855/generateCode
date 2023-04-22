@@ -10,6 +10,6 @@
     </resultMap>
 
     <select id="getAll${modelName}s" resultMap="BaseResultMap">
-        select * from ${tableName};
+        select * from ${tableName} t1 left join t2  on t1.id= t2.;
     </select>
 </mapper>

@@ -51,15 +51,18 @@
     </div>
     <el-table
             :data="tableData"
+            @selection-change="handleSelectionChange"
             stripe
             border
             style="width: 100%">
         <el-table-column
+                type="selection"
                 prop="tableName"
                 label="表名称"
                 width="180">
         </el-table-column>
         <el-table-column
+
                 label="实体类名称"
                 width="180">
             <template slot-scope="scope">
@@ -97,6 +100,7 @@
         data: function () {
             return {
                 tableData: [],
+                tableDataTo: [],
                 result: 'waiting',
                 codePath: '',
                 packageName: 'org.javaboy.test',
@@ -104,15 +108,19 @@
                 connectBtnEnabled: true,
                 db: {
                     username: "root",
-                    password: "123",
-                    url: "localhost:3306/vmall"
+                    password: "root",
+                    url: "localhost:3306/"
                 }
             }
         },
         methods: {
+            handleSelectionChange(val){
+                console.log(val);
+                this.tableDataTo=val
+            },
             generateCode() {
                 let _this = this;
-                axios.post('/generateCode', this.tableData)
+                axios.post('/generateCode', this.tableDataTo)
                     .then(function (response) {
                         _this.result = response.data.msg;
                         _this.codePath = response.data.obj;
@@ -133,16 +141,22 @@
             },
             connect() {
                 let _this = this;
-                this.db.url = "jdbc:mysql://" + this.db.url + "?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
-                axios.post('/connect', this.db)
+                let url2 = "jdbc:mysql://" + this.db.url + "?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
+                let db2 ={};
+                db2.url=url2;
+                db2.username = this.db.username;
+                db2.password = this.db.password;
+                console.log(url2);
+                axios.post('/connect', db2)
                     .then(function (response) {
                         _this.msg = response.data.msg;
-                        _this.db = {
-                            username: "root",
-                            password: "123",
-                            url: "localhost:3306/vmall"
-                        }
-                        _this.connectBtnEnabled = false;
+                        console.log(response.data.msg);
+                        // _this.db = {
+                        //     username: _this.db.username,
+                        //     password: _this.db.password,
+                        //     url: _this.db.url
+                        // }
+                        // _this.connectBtnEnabled = false;
                     })
                     .catch(function (error) {
                         console.log(error);

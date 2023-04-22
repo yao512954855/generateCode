@@ -3,8 +3,8 @@ package org.javaboy.generate_code.model;
 import java.util.List;
 
 /**
- * @author 江南一点雨
- * @微信公众号 江南一点雨 vhr
+ * @author yao
+ * @jikeyou vhr
  * @网站 http://www.itboyhub.com
  * @国际站 http://www.javaboy.org
  * @微信 a_java_boy

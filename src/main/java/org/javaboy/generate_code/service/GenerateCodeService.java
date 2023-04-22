@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author 江南一点雨
- * @微信公众号 江南一点雨
+ * @author yao
+ * @jikeyou
  * @网站 http://www.itboyhub.com
  * @国际站 http://www.javaboy.org
  * @微信 a_java_boy
@@ -71,7 +71,7 @@ public class GenerateCodeService {
                     columnClassList.add(columnClass);
                 }
                 tableClass.setColumns(columnClassList);
-                String path = realPath + "/" + tableClass.getPackageName().replace(".", "/");
+                String path = "src/main/resources/file/" + tableClass.getPackageName().replace(".", "/");
                 generate(modelTemplate, tableClass, path + "/model/");
                 generate(mapperJavaTemplate, tableClass, path + "/mapper/");
                 generate(mapperXmlTemplate, tableClass, path + "/mapper/");
@@ -90,7 +90,9 @@ public class GenerateCodeService {
         if (!folder.exists()) {
             folder.mkdirs();
         }
-        String fileName = path + "/" + tableClass.getModelName() + template.getName().replace(".ftl", "").replace("Model", "");
+        System.out.println("template.getName():"+template.getName());
+        String fileName = path + "/" + tableClass.getModelName() + template.getName().replace(".ftl", "");
+
         FileOutputStream fos = new FileOutputStream(fileName);
         OutputStreamWriter out = new OutputStreamWriter(fos);
         template.process(tableClass,out);

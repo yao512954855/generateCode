@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * @author 江南一点雨
- * @微信公众号 江南一点雨 vhr generate-code
+ * @author yao
+ * @jikeyou vhr generate-code
  * @网站 http://www.itboyhub.com
  * @国际站 http://www.javaboy.org
  * @微信 a_java_boy
@@ -28,6 +28,6 @@ public class GenerateCodeController {
 
     @PostMapping("/generateCode")
     public RespBean generateCode(@RequestBody List<TableClass> tableClassList, HttpServletRequest req) {
-        return generateCodeService.generateCode(tableClassList, req.getServletContext().getRealPath("/"));
+        return generateCodeService.generateCode(tableClassList, "src/main/resources");
     }
 }
